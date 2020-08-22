@@ -2,7 +2,14 @@
 name = "predecessor"
 version = "0.1.0"
 authors = ["shsandro <shsandro@github.com>"]
+repository = "https://github.com/shsandro/predecessor"
+license = "Apache-2.0"
 edition = "2018"
+description = """
+Predecessor Array for tree representation.
+"""
+categories = ["algorithms", "data-structures"]
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
