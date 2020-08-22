@@ -1,7 +1,8 @@
 /*
 Predecessor Array for tree representation
 */
-use crate::util;
+mod util;
+
 use fera::graph::algs::trees::Trees;
 use fera::graph::prelude::*;
 use fera::graph::traverse::{Control, Dfs, OnDiscoverTreeEdge};
@@ -25,9 +26,9 @@ impl fmt::Display for PredecessorError {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct PredecessorArray<'a> {
-    pub pred: DefaultVertexPropMut<StaticGraph, OptionVertex<StaticGraph>>,
+    pred: DefaultVertexPropMut<StaticGraph, OptionVertex<StaticGraph>>,
     pub g: &'a StaticGraph,
 }
 
@@ -81,7 +82,6 @@ impl<'a> PredecessorArray<'a> {
         }
     }
 
-    #[allow(unused)]
     pub fn from_edges(
         g: &'a StaticGraph,
         edges: &[Edge<StaticGraph>],
@@ -137,7 +137,6 @@ impl<'a> PredecessorArray<'a> {
         self.pred[v].into_option()
     }
 
-    #[allow(unused)]
     pub fn neighbors(&self, v: Vertex<StaticGraph>) -> Vec<Vertex<StaticGraph>> {
         let mut neighbors: Vec<Vertex<StaticGraph>> = Vec::new();
 
@@ -156,7 +155,6 @@ impl<'a> PredecessorArray<'a> {
         neighbors
     }
 
-    #[allow(unused)]
     pub fn is_root(&self, v: Vertex<StaticGraph>) -> bool {
         self.pred[v].into_option().is_none()
     }
@@ -205,7 +203,6 @@ impl<'a> PredecessorArray<'a> {
         u_root != v_root
     }
 
-    #[allow(unused)]
     // TODO: melhorar testes para change_edges
     pub fn change_edges(&mut self, ins: Edge<StaticGraph>, rem: Edge<StaticGraph>) -> bool {
         // aresta a ser inserida não pode estar na árvore
@@ -244,7 +241,6 @@ impl<'a> PredecessorArray<'a> {
         }
     }
 
-    #[allow(unused)]
     pub fn change_pred(
         &mut self,
         ins: Edge<StaticGraph>,
@@ -277,7 +273,6 @@ impl<'a> PredecessorArray<'a> {
         }
     }
 
-    #[allow(unused)]
     pub fn change_any(
         &mut self,
         ins: Edge<StaticGraph>,
