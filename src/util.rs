@@ -14,7 +14,7 @@ pub fn new_rng_with_seed(x: u32) -> XorShiftRng {
     ])
 }
 
-// return a list of random tree edges from the Kruskal's algorithm
+// returns a list of random tree edges from the Kruskal's algorithm
 pub fn kruskal_random_tree(g: &StaticGraph) -> Vec<Edge<StaticGraph>> {
     let mut rng = new_rng_with_seed(random());
     let mut edges = vec(g.edges());
@@ -28,7 +28,6 @@ pub fn kruskal_random_tree(g: &StaticGraph) -> Vec<Edge<StaticGraph>> {
 }
 
 // executes the reduction from Hamilton Cycle to Hamilton Path
-// return the graph built in reduction
 pub fn reduction(g: &StaticGraph) -> StaticGraph {
     let n: usize = g.num_vertices();
     let v_: usize = n;
