@@ -1,8 +1,10 @@
 /*
 Predecessor Array for tree representation
 */
+mod error;
 mod util;
 
+use error::PredecessorError;
 use fera::graph::algs::trees::Trees;
 use fera::graph::prelude::*;
 use fera::graph::traverse::{Control, Dfs, OnDiscoverTreeEdge};
@@ -10,21 +12,6 @@ use rand::random;
 use rand::Rng;
 use std::fmt;
 use std::mem::replace;
-
-#[derive(Debug)]
-pub enum PredecessorError {
-    EmptyGraph,
-    NotTreeEdges,
-}
-
-impl fmt::Display for PredecessorError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            PredecessorError::EmptyGraph => write!(f, "The graph has no vertex."),
-            PredecessorError::NotTreeEdges => write!(f, "The edges do not build a tree."),
-        }
-    }
-}
 
 #[derive(Clone, Debug)]
 pub struct PredecessorArray<'a> {
