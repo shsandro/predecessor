@@ -1,0 +1,11 @@
+[package]
+name = "predecessor"
+version = "0.1.0"
+authors = ["shsandro <shsandro@github.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+fera = { version = "0.2", features = ["graph"] }
+rand = "0.5"
