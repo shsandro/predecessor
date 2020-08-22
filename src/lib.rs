@@ -98,18 +98,6 @@ impl<'a> PredecessorArray<'a> {
         }
     }
 
-    fn set_pred(
-        &mut self,
-        u: Vertex<StaticGraph>,
-        predecessor: OptionVertex<StaticGraph>,
-    ) -> Option<Vertex<StaticGraph>> {
-        replace(&mut self.pred[u], predecessor).into_option()
-    }
-
-    fn cut_pred(&mut self, u: Vertex<StaticGraph>) -> Option<Vertex<StaticGraph>> {
-        replace(&mut self.pred[u], StaticGraph::vertex_none()).into_option()
-    }
-
     pub fn make_root(&mut self, v: Vertex<StaticGraph>) {
         let mut pred = self.cut_pred(v);
         let mut cur = v;
@@ -172,22 +160,6 @@ impl<'a> PredecessorArray<'a> {
         let v = self.g.target(e);
 
         self.is_pred(u, v) || self.is_pred(v, u)
-    }
-
-    fn distinct_tree(&self, u: Vertex<StaticGraph>, v: Vertex<StaticGraph>) -> bool {
-        let mut u_root = u;
-
-        while let Some(pred) = self.parent(u_root) {
-            u_root = pred;
-        }
-
-        let mut v_root = v;
-
-        while let Some(pred) = self.parent(v_root) {
-            v_root = pred;
-        }
-
-        u_root != v_root
     }
 
     // TODO: melhorar testes para change_edges
@@ -284,6 +256,34 @@ impl<'a> PredecessorArray<'a> {
         } else {
             None
         }
+    }
+
+    fn set_pred(
+        &mut self,
+        u: Vertex<StaticGraph>,
+        predecessor: OptionVertex<StaticGraph>,
+    ) -> Option<Vertex<StaticGraph>> {
+        replace(&mut self.pred[u], predecessor).into_option()
+    }
+
+    fn cut_pred(&mut self, u: Vertex<StaticGraph>) -> Option<Vertex<StaticGraph>> {
+        replace(&mut self.pred[u], StaticGraph::vertex_none()).into_option()
+    }
+
+    fn distinct_tree(&self, u: Vertex<StaticGraph>, v: Vertex<StaticGraph>) -> bool {
+        let mut u_root = u;
+
+        while let Some(pred) = self.parent(u_root) {
+            u_root = pred;
+        }
+
+        let mut v_root = v;
+
+        while let Some(pred) = self.parent(v_root) {
+            v_root = pred;
+        }
+
+        u_root != v_root
     }
 
     // choose a random vertex from u to root
@@ -404,6 +404,7 @@ mod tests {
             }
         }
     }
+
     #[test]
     // check if the edges into the predecessor array are valid or if a vertex is root
     // check if the edges in the predecessor array builds a tree
